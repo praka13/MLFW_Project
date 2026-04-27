@@ -1,0 +1,1536 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LEO Channel Effects on 15 Modulation Types</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Arial, sans-serif; 
+            margin: 40px; 
+            background: #0d1117; 
+            color: #c9d1d9; 
+        }
+        .container { 
+            max-width: 1500px; 
+            margin: 0 auto; 
+            background: #161b22; 
+            padding: 30px; 
+            border-radius: 15px; 
+            border: 1px solid #30363d;
+        }
+        h1 { 
+            color: #58a6ff; 
+            border-bottom: 2px solid #30363d; 
+            padding-bottom: 15px; 
+        }
+        h2 { 
+            color: #e6edf3; 
+            margin-top: 40px; 
+            background: #21262d; 
+            padding: 12px 18px; 
+            border-radius: 8px; 
+            border-left: 4px solid #58a6ff;
+        }
+        .mod-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: #0d1117;
+            border-radius: 10px;
+            border: 1px solid #30363d;
+        }
+        .mod-title { 
+            font-size: 1.4em; 
+            font-weight: bold; 
+            color: #58a6ff; 
+            margin-bottom: 5px; 
+        }
+        .doppler-badge {
+            display: inline-block;
+            background: #da3633;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            margin-left: 10px;
+        }
+        .clickable-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin: 15px 0;
+        }
+        .clickable-grid img {
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 2px solid #30363d;
+        }
+        .clickable-grid img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 4px 20px rgba(88, 166, 255, 0.3);
+            border-color: #58a6ff;
+        }
+        .grid-label {
+            text-align: center;
+            font-size: 0.75em;
+            color: #8b949e;
+            margin-top: 2px;
+        }
+        .comparison-grid-img {
+            width: 100%;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 1px solid #30363d;
+        }
+        .insight-box {
+            background: #161b22;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #3fb950;
+            margin: 20px 0;
+        }
+        .key-insight {
+            background: #1a1f2b;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-size: 0.9em;
+        }
+        .footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #30363d;
+            color: #8b949e;
+            font-size: 0.85em;
+        }
+        a { color: #58a6ff; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>LEO Satellite Channel Effects on Modulation Classification</h1>
+        <p><strong>15 Modulation Types: Before vs After Channel</strong></p>
+        <p>
+            Carrier: 2.2 GHz | Velocity: 7.5 km/s | Elevation: 45 deg | SNR: 10 dB
+        </p>
+        
+        <div class="insight-box">
+            <h3>Key Finding</h3>
+            <p>The LEO channel <strong>SHIFTS</strong> the spectrogram by ~39 kHz (Doppler) and adds <strong>MULTIPATH BLUR</strong>, 
+            but <strong>DOES NOT DESTROY</strong> the fundamental modulation shape.</p>
+            <p><strong>Phase information (preserved by complex STFT) is CRUCIAL</strong> for distinguishing 
+            phase-modulated signals like BPSK, Frank, P1-P4.</p>
+        </div>
+        
+        <h2>Complete Comparison Grid (All 15 Modulations)</h2>
+        <a href="all_15_before_after_grid.png" target="_blank">
+            <img src="all_15_before_after_grid.png" alt="All 15 Before/After" class="comparison-grid-img">
+        </a>
+        <p style="text-align: center; color: #8b949e;">Click image to open full size in new tab</p>
+        
+        <h2>Individual Modulation Analysis (Click Any Plot to Enlarge)</h2>
+        <p>Each modulation has 12 individual plots in a 3x4 grid. <strong>Click any plot</strong> to open it in a new tab.</p>
+
+        <div class="mod-section">
+            <div class="mod-title">
+                NM
+                <span class="doppler-badge">Doppler: 38.9 kHz</span>
+            </div>
+            
+            <div class="clickable-grid">
+                <div>
+                    <a href="individual_plots/NM/01_clean_magnitude_spectrogram.png" target="_blank">
+                        <img src="individual_plots/NM/01_clean_magnitude_spectrogram.png" alt="Clean Mag Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Magnitude Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/NM/02_clean_phase_spectrogram.png" target="_blank">
+                        <img src="individual_plots/NM/02_clean_phase_spectrogram.png" alt="Clean Phase Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Phase Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/NM/07_leo_magnitude_spectrogram.png" target="_blank">
+                        <img src="individual_plots/NM/07_leo_magnitude_spectrogram.png" alt="LEO Mag Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Magnitude Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/NM/08_leo_phase_spectrogram.png" target="_blank">
+                        <img src="individual_plots/NM/08_leo_phase_spectrogram.png" alt="LEO Phase Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Phase Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/NM/03_clean_instantaneous_frequency.png" target="_blank">
+                        <img src="individual_plots/NM/03_clean_instantaneous_frequency.png" alt="Clean IF" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Instantaneous Frequency</div>
+                </div>
+                <div>
+                    <a href="individual_plots/NM/04_clean_time_domain.png" target="_blank">
+                        <img src="individual_plots/NM/04_clean_time_domain.png" alt="Clean Time" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Time Domain</div>
+                </div>
+                <div>
+                    <a href="individual_plots/NM/09_leo_instantaneous_frequency.png" target="_blank">
+                        <img src="individual_plots/NM/09_leo_instantaneous_frequency.png" alt="LEO IF" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Instantaneous Frequency</div>
+                </div>
+                <div>
+                    <a href="individual_plots/NM/10_leo_time_domain.png" target="_blank">
+                        <img src="individual_plots/NM/10_leo_time_domain.png" alt="LEO Time" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Time Domain</div>
+                </div>
+                <div>
+                    <a href="individual_plots/NM/05_clean_frequency_spectrum.png" target="_blank">
+                        <img src="individual_plots/NM/05_clean_frequency_spectrum.png" alt="Clean Freq" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Frequency Spectrum</div>
+                </div>
+                <div>
+                    <a href="individual_plots/NM/06_clean_iq_constellation.png" target="_blank">
+                        <img src="individual_plots/NM/06_clean_iq_constellation.png" alt="Clean IQ" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean IQ Constellation</div>
+                </div>
+                <div>
+                    <a href="individual_plots/NM/11_leo_frequency_spectrum.png" target="_blank">
+                        <img src="individual_plots/NM/11_leo_frequency_spectrum.png" alt="LEO Freq" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Frequency Spectrum</div>
+                </div>
+                <div>
+                    <a href="individual_plots/NM/12_leo_iq_constellation.png" target="_blank">
+                        <img src="individual_plots/NM/12_leo_iq_constellation.png" alt="LEO IQ" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO IQ Constellation</div>
+                </div>
+            </div>
+            
+            <details>
+                <summary style="cursor: pointer; color: #58a6ff; margin-top: 10px;">
+                    View combined 3x4 overview
+                </summary>
+                <a href="NM_before_after.png" target="_blank">
+                    <img src="NM_before_after.png" alt="NM combined" style="width: 100%; margin-top: 10px; border-radius: 8px;">
+                </a>
+            </details>
+        </div>
+
+        <div class="mod-section">
+            <div class="mod-title">
+                LFM
+                <span class="doppler-badge">Doppler: 38.9 kHz</span>
+            </div>
+            
+            <div class="clickable-grid">
+                <div>
+                    <a href="individual_plots/LFM/01_clean_magnitude_spectrogram.png" target="_blank">
+                        <img src="individual_plots/LFM/01_clean_magnitude_spectrogram.png" alt="Clean Mag Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Magnitude Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/LFM/02_clean_phase_spectrogram.png" target="_blank">
+                        <img src="individual_plots/LFM/02_clean_phase_spectrogram.png" alt="Clean Phase Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Phase Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/LFM/07_leo_magnitude_spectrogram.png" target="_blank">
+                        <img src="individual_plots/LFM/07_leo_magnitude_spectrogram.png" alt="LEO Mag Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Magnitude Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/LFM/08_leo_phase_spectrogram.png" target="_blank">
+                        <img src="individual_plots/LFM/08_leo_phase_spectrogram.png" alt="LEO Phase Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Phase Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/LFM/03_clean_instantaneous_frequency.png" target="_blank">
+                        <img src="individual_plots/LFM/03_clean_instantaneous_frequency.png" alt="Clean IF" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Instantaneous Frequency</div>
+                </div>
+                <div>
+                    <a href="individual_plots/LFM/04_clean_time_domain.png" target="_blank">
+                        <img src="individual_plots/LFM/04_clean_time_domain.png" alt="Clean Time" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Time Domain</div>
+                </div>
+                <div>
+                    <a href="individual_plots/LFM/09_leo_instantaneous_frequency.png" target="_blank">
+                        <img src="individual_plots/LFM/09_leo_instantaneous_frequency.png" alt="LEO IF" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Instantaneous Frequency</div>
+                </div>
+                <div>
+                    <a href="individual_plots/LFM/10_leo_time_domain.png" target="_blank">
+                        <img src="individual_plots/LFM/10_leo_time_domain.png" alt="LEO Time" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Time Domain</div>
+                </div>
+                <div>
+                    <a href="individual_plots/LFM/05_clean_frequency_spectrum.png" target="_blank">
+                        <img src="individual_plots/LFM/05_clean_frequency_spectrum.png" alt="Clean Freq" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Frequency Spectrum</div>
+                </div>
+                <div>
+                    <a href="individual_plots/LFM/06_clean_iq_constellation.png" target="_blank">
+                        <img src="individual_plots/LFM/06_clean_iq_constellation.png" alt="Clean IQ" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean IQ Constellation</div>
+                </div>
+                <div>
+                    <a href="individual_plots/LFM/11_leo_frequency_spectrum.png" target="_blank">
+                        <img src="individual_plots/LFM/11_leo_frequency_spectrum.png" alt="LEO Freq" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Frequency Spectrum</div>
+                </div>
+                <div>
+                    <a href="individual_plots/LFM/12_leo_iq_constellation.png" target="_blank">
+                        <img src="individual_plots/LFM/12_leo_iq_constellation.png" alt="LEO IQ" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO IQ Constellation</div>
+                </div>
+            </div>
+            
+            <details>
+                <summary style="cursor: pointer; color: #58a6ff; margin-top: 10px;">
+                    View combined 3x4 overview
+                </summary>
+                <a href="LFM_before_after.png" target="_blank">
+                    <img src="LFM_before_after.png" alt="LFM combined" style="width: 100%; margin-top: 10px; border-radius: 8px;">
+                </a>
+            </details>
+        </div>
+
+        <div class="mod-section">
+            <div class="mod-title">
+                DLFM
+                <span class="doppler-badge">Doppler: 38.9 kHz</span>
+            </div>
+            
+            <div class="clickable-grid">
+                <div>
+                    <a href="individual_plots/DLFM/01_clean_magnitude_spectrogram.png" target="_blank">
+                        <img src="individual_plots/DLFM/01_clean_magnitude_spectrogram.png" alt="Clean Mag Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Magnitude Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/DLFM/02_clean_phase_spectrogram.png" target="_blank">
+                        <img src="individual_plots/DLFM/02_clean_phase_spectrogram.png" alt="Clean Phase Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Phase Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/DLFM/07_leo_magnitude_spectrogram.png" target="_blank">
+                        <img src="individual_plots/DLFM/07_leo_magnitude_spectrogram.png" alt="LEO Mag Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Magnitude Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/DLFM/08_leo_phase_spectrogram.png" target="_blank">
+                        <img src="individual_plots/DLFM/08_leo_phase_spectrogram.png" alt="LEO Phase Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Phase Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/DLFM/03_clean_instantaneous_frequency.png" target="_blank">
+                        <img src="individual_plots/DLFM/03_clean_instantaneous_frequency.png" alt="Clean IF" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Instantaneous Frequency</div>
+                </div>
+                <div>
+                    <a href="individual_plots/DLFM/04_clean_time_domain.png" target="_blank">
+                        <img src="individual_plots/DLFM/04_clean_time_domain.png" alt="Clean Time" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Time Domain</div>
+                </div>
+                <div>
+                    <a href="individual_plots/DLFM/09_leo_instantaneous_frequency.png" target="_blank">
+                        <img src="individual_plots/DLFM/09_leo_instantaneous_frequency.png" alt="LEO IF" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Instantaneous Frequency</div>
+                </div>
+                <div>
+                    <a href="individual_plots/DLFM/10_leo_time_domain.png" target="_blank">
+                        <img src="individual_plots/DLFM/10_leo_time_domain.png" alt="LEO Time" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Time Domain</div>
+                </div>
+                <div>
+                    <a href="individual_plots/DLFM/05_clean_frequency_spectrum.png" target="_blank">
+                        <img src="individual_plots/DLFM/05_clean_frequency_spectrum.png" alt="Clean Freq" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Frequency Spectrum</div>
+                </div>
+                <div>
+                    <a href="individual_plots/DLFM/06_clean_iq_constellation.png" target="_blank">
+                        <img src="individual_plots/DLFM/06_clean_iq_constellation.png" alt="Clean IQ" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean IQ Constellation</div>
+                </div>
+                <div>
+                    <a href="individual_plots/DLFM/11_leo_frequency_spectrum.png" target="_blank">
+                        <img src="individual_plots/DLFM/11_leo_frequency_spectrum.png" alt="LEO Freq" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Frequency Spectrum</div>
+                </div>
+                <div>
+                    <a href="individual_plots/DLFM/12_leo_iq_constellation.png" target="_blank">
+                        <img src="individual_plots/DLFM/12_leo_iq_constellation.png" alt="LEO IQ" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO IQ Constellation</div>
+                </div>
+            </div>
+            
+            <details>
+                <summary style="cursor: pointer; color: #58a6ff; margin-top: 10px;">
+                    View combined 3x4 overview
+                </summary>
+                <a href="DLFM_before_after.png" target="_blank">
+                    <img src="DLFM_before_after.png" alt="DLFM combined" style="width: 100%; margin-top: 10px; border-radius: 8px;">
+                </a>
+            </details>
+        </div>
+
+        <div class="mod-section">
+            <div class="mod-title">
+                MLFM
+                <span class="doppler-badge">Doppler: 38.9 kHz</span>
+            </div>
+            
+            <div class="clickable-grid">
+                <div>
+                    <a href="individual_plots/MLFM/01_clean_magnitude_spectrogram.png" target="_blank">
+                        <img src="individual_plots/MLFM/01_clean_magnitude_spectrogram.png" alt="Clean Mag Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Magnitude Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/MLFM/02_clean_phase_spectrogram.png" target="_blank">
+                        <img src="individual_plots/MLFM/02_clean_phase_spectrogram.png" alt="Clean Phase Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Phase Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/MLFM/07_leo_magnitude_spectrogram.png" target="_blank">
+                        <img src="individual_plots/MLFM/07_leo_magnitude_spectrogram.png" alt="LEO Mag Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Magnitude Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/MLFM/08_leo_phase_spectrogram.png" target="_blank">
+                        <img src="individual_plots/MLFM/08_leo_phase_spectrogram.png" alt="LEO Phase Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Phase Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/MLFM/03_clean_instantaneous_frequency.png" target="_blank">
+                        <img src="individual_plots/MLFM/03_clean_instantaneous_frequency.png" alt="Clean IF" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Instantaneous Frequency</div>
+                </div>
+                <div>
+                    <a href="individual_plots/MLFM/04_clean_time_domain.png" target="_blank">
+                        <img src="individual_plots/MLFM/04_clean_time_domain.png" alt="Clean Time" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Time Domain</div>
+                </div>
+                <div>
+                    <a href="individual_plots/MLFM/09_leo_instantaneous_frequency.png" target="_blank">
+                        <img src="individual_plots/MLFM/09_leo_instantaneous_frequency.png" alt="LEO IF" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Instantaneous Frequency</div>
+                </div>
+                <div>
+                    <a href="individual_plots/MLFM/10_leo_time_domain.png" target="_blank">
+                        <img src="individual_plots/MLFM/10_leo_time_domain.png" alt="LEO Time" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Time Domain</div>
+                </div>
+                <div>
+                    <a href="individual_plots/MLFM/05_clean_frequency_spectrum.png" target="_blank">
+                        <img src="individual_plots/MLFM/05_clean_frequency_spectrum.png" alt="Clean Freq" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Frequency Spectrum</div>
+                </div>
+                <div>
+                    <a href="individual_plots/MLFM/06_clean_iq_constellation.png" target="_blank">
+                        <img src="individual_plots/MLFM/06_clean_iq_constellation.png" alt="Clean IQ" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean IQ Constellation</div>
+                </div>
+                <div>
+                    <a href="individual_plots/MLFM/11_leo_frequency_spectrum.png" target="_blank">
+                        <img src="individual_plots/MLFM/11_leo_frequency_spectrum.png" alt="LEO Freq" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Frequency Spectrum</div>
+                </div>
+                <div>
+                    <a href="individual_plots/MLFM/12_leo_iq_constellation.png" target="_blank">
+                        <img src="individual_plots/MLFM/12_leo_iq_constellation.png" alt="LEO IQ" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO IQ Constellation</div>
+                </div>
+            </div>
+            
+            <details>
+                <summary style="cursor: pointer; color: #58a6ff; margin-top: 10px;">
+                    View combined 3x4 overview
+                </summary>
+                <a href="MLFM_before_after.png" target="_blank">
+                    <img src="MLFM_before_after.png" alt="MLFM combined" style="width: 100%; margin-top: 10px; border-radius: 8px;">
+                </a>
+            </details>
+        </div>
+
+        <div class="mod-section">
+            <div class="mod-title">
+                EQFM
+                <span class="doppler-badge">Doppler: 38.9 kHz</span>
+            </div>
+            
+            <div class="clickable-grid">
+                <div>
+                    <a href="individual_plots/EQFM/01_clean_magnitude_spectrogram.png" target="_blank">
+                        <img src="individual_plots/EQFM/01_clean_magnitude_spectrogram.png" alt="Clean Mag Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Magnitude Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/EQFM/02_clean_phase_spectrogram.png" target="_blank">
+                        <img src="individual_plots/EQFM/02_clean_phase_spectrogram.png" alt="Clean Phase Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Phase Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/EQFM/07_leo_magnitude_spectrogram.png" target="_blank">
+                        <img src="individual_plots/EQFM/07_leo_magnitude_spectrogram.png" alt="LEO Mag Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Magnitude Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/EQFM/08_leo_phase_spectrogram.png" target="_blank">
+                        <img src="individual_plots/EQFM/08_leo_phase_spectrogram.png" alt="LEO Phase Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Phase Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/EQFM/03_clean_instantaneous_frequency.png" target="_blank">
+                        <img src="individual_plots/EQFM/03_clean_instantaneous_frequency.png" alt="Clean IF" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Instantaneous Frequency</div>
+                </div>
+                <div>
+                    <a href="individual_plots/EQFM/04_clean_time_domain.png" target="_blank">
+                        <img src="individual_plots/EQFM/04_clean_time_domain.png" alt="Clean Time" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Time Domain</div>
+                </div>
+                <div>
+                    <a href="individual_plots/EQFM/09_leo_instantaneous_frequency.png" target="_blank">
+                        <img src="individual_plots/EQFM/09_leo_instantaneous_frequency.png" alt="LEO IF" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Instantaneous Frequency</div>
+                </div>
+                <div>
+                    <a href="individual_plots/EQFM/10_leo_time_domain.png" target="_blank">
+                        <img src="individual_plots/EQFM/10_leo_time_domain.png" alt="LEO Time" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Time Domain</div>
+                </div>
+                <div>
+                    <a href="individual_plots/EQFM/05_clean_frequency_spectrum.png" target="_blank">
+                        <img src="individual_plots/EQFM/05_clean_frequency_spectrum.png" alt="Clean Freq" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Frequency Spectrum</div>
+                </div>
+                <div>
+                    <a href="individual_plots/EQFM/06_clean_iq_constellation.png" target="_blank">
+                        <img src="individual_plots/EQFM/06_clean_iq_constellation.png" alt="Clean IQ" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean IQ Constellation</div>
+                </div>
+                <div>
+                    <a href="individual_plots/EQFM/11_leo_frequency_spectrum.png" target="_blank">
+                        <img src="individual_plots/EQFM/11_leo_frequency_spectrum.png" alt="LEO Freq" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Frequency Spectrum</div>
+                </div>
+                <div>
+                    <a href="individual_plots/EQFM/12_leo_iq_constellation.png" target="_blank">
+                        <img src="individual_plots/EQFM/12_leo_iq_constellation.png" alt="LEO IQ" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO IQ Constellation</div>
+                </div>
+            </div>
+            
+            <details>
+                <summary style="cursor: pointer; color: #58a6ff; margin-top: 10px;">
+                    View combined 3x4 overview
+                </summary>
+                <a href="EQFM_before_after.png" target="_blank">
+                    <img src="EQFM_before_after.png" alt="EQFM combined" style="width: 100%; margin-top: 10px; border-radius: 8px;">
+                </a>
+            </details>
+        </div>
+
+        <div class="mod-section">
+            <div class="mod-title">
+                SFM
+                <span class="doppler-badge">Doppler: 38.9 kHz</span>
+            </div>
+            
+            <div class="clickable-grid">
+                <div>
+                    <a href="individual_plots/SFM/01_clean_magnitude_spectrogram.png" target="_blank">
+                        <img src="individual_plots/SFM/01_clean_magnitude_spectrogram.png" alt="Clean Mag Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Magnitude Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/SFM/02_clean_phase_spectrogram.png" target="_blank">
+                        <img src="individual_plots/SFM/02_clean_phase_spectrogram.png" alt="Clean Phase Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Phase Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/SFM/07_leo_magnitude_spectrogram.png" target="_blank">
+                        <img src="individual_plots/SFM/07_leo_magnitude_spectrogram.png" alt="LEO Mag Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Magnitude Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/SFM/08_leo_phase_spectrogram.png" target="_blank">
+                        <img src="individual_plots/SFM/08_leo_phase_spectrogram.png" alt="LEO Phase Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Phase Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/SFM/03_clean_instantaneous_frequency.png" target="_blank">
+                        <img src="individual_plots/SFM/03_clean_instantaneous_frequency.png" alt="Clean IF" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Instantaneous Frequency</div>
+                </div>
+                <div>
+                    <a href="individual_plots/SFM/04_clean_time_domain.png" target="_blank">
+                        <img src="individual_plots/SFM/04_clean_time_domain.png" alt="Clean Time" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Time Domain</div>
+                </div>
+                <div>
+                    <a href="individual_plots/SFM/09_leo_instantaneous_frequency.png" target="_blank">
+                        <img src="individual_plots/SFM/09_leo_instantaneous_frequency.png" alt="LEO IF" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Instantaneous Frequency</div>
+                </div>
+                <div>
+                    <a href="individual_plots/SFM/10_leo_time_domain.png" target="_blank">
+                        <img src="individual_plots/SFM/10_leo_time_domain.png" alt="LEO Time" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Time Domain</div>
+                </div>
+                <div>
+                    <a href="individual_plots/SFM/05_clean_frequency_spectrum.png" target="_blank">
+                        <img src="individual_plots/SFM/05_clean_frequency_spectrum.png" alt="Clean Freq" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Frequency Spectrum</div>
+                </div>
+                <div>
+                    <a href="individual_plots/SFM/06_clean_iq_constellation.png" target="_blank">
+                        <img src="individual_plots/SFM/06_clean_iq_constellation.png" alt="Clean IQ" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean IQ Constellation</div>
+                </div>
+                <div>
+                    <a href="individual_plots/SFM/11_leo_frequency_spectrum.png" target="_blank">
+                        <img src="individual_plots/SFM/11_leo_frequency_spectrum.png" alt="LEO Freq" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Frequency Spectrum</div>
+                </div>
+                <div>
+                    <a href="individual_plots/SFM/12_leo_iq_constellation.png" target="_blank">
+                        <img src="individual_plots/SFM/12_leo_iq_constellation.png" alt="LEO IQ" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO IQ Constellation</div>
+                </div>
+            </div>
+            
+            <details>
+                <summary style="cursor: pointer; color: #58a6ff; margin-top: 10px;">
+                    View combined 3x4 overview
+                </summary>
+                <a href="SFM_before_after.png" target="_blank">
+                    <img src="SFM_before_after.png" alt="SFM combined" style="width: 100%; margin-top: 10px; border-radius: 8px;">
+                </a>
+            </details>
+        </div>
+
+        <div class="mod-section">
+            <div class="mod-title">
+                BFSK
+                <span class="doppler-badge">Doppler: 38.9 kHz</span>
+            </div>
+            
+            <div class="clickable-grid">
+                <div>
+                    <a href="individual_plots/BFSK/01_clean_magnitude_spectrogram.png" target="_blank">
+                        <img src="individual_plots/BFSK/01_clean_magnitude_spectrogram.png" alt="Clean Mag Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Magnitude Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/BFSK/02_clean_phase_spectrogram.png" target="_blank">
+                        <img src="individual_plots/BFSK/02_clean_phase_spectrogram.png" alt="Clean Phase Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Phase Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/BFSK/07_leo_magnitude_spectrogram.png" target="_blank">
+                        <img src="individual_plots/BFSK/07_leo_magnitude_spectrogram.png" alt="LEO Mag Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Magnitude Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/BFSK/08_leo_phase_spectrogram.png" target="_blank">
+                        <img src="individual_plots/BFSK/08_leo_phase_spectrogram.png" alt="LEO Phase Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Phase Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/BFSK/03_clean_instantaneous_frequency.png" target="_blank">
+                        <img src="individual_plots/BFSK/03_clean_instantaneous_frequency.png" alt="Clean IF" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Instantaneous Frequency</div>
+                </div>
+                <div>
+                    <a href="individual_plots/BFSK/04_clean_time_domain.png" target="_blank">
+                        <img src="individual_plots/BFSK/04_clean_time_domain.png" alt="Clean Time" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Time Domain</div>
+                </div>
+                <div>
+                    <a href="individual_plots/BFSK/09_leo_instantaneous_frequency.png" target="_blank">
+                        <img src="individual_plots/BFSK/09_leo_instantaneous_frequency.png" alt="LEO IF" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Instantaneous Frequency</div>
+                </div>
+                <div>
+                    <a href="individual_plots/BFSK/10_leo_time_domain.png" target="_blank">
+                        <img src="individual_plots/BFSK/10_leo_time_domain.png" alt="LEO Time" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Time Domain</div>
+                </div>
+                <div>
+                    <a href="individual_plots/BFSK/05_clean_frequency_spectrum.png" target="_blank">
+                        <img src="individual_plots/BFSK/05_clean_frequency_spectrum.png" alt="Clean Freq" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Frequency Spectrum</div>
+                </div>
+                <div>
+                    <a href="individual_plots/BFSK/06_clean_iq_constellation.png" target="_blank">
+                        <img src="individual_plots/BFSK/06_clean_iq_constellation.png" alt="Clean IQ" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean IQ Constellation</div>
+                </div>
+                <div>
+                    <a href="individual_plots/BFSK/11_leo_frequency_spectrum.png" target="_blank">
+                        <img src="individual_plots/BFSK/11_leo_frequency_spectrum.png" alt="LEO Freq" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Frequency Spectrum</div>
+                </div>
+                <div>
+                    <a href="individual_plots/BFSK/12_leo_iq_constellation.png" target="_blank">
+                        <img src="individual_plots/BFSK/12_leo_iq_constellation.png" alt="LEO IQ" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO IQ Constellation</div>
+                </div>
+            </div>
+            
+            <details>
+                <summary style="cursor: pointer; color: #58a6ff; margin-top: 10px;">
+                    View combined 3x4 overview
+                </summary>
+                <a href="BFSK_before_after.png" target="_blank">
+                    <img src="BFSK_before_after.png" alt="BFSK combined" style="width: 100%; margin-top: 10px; border-radius: 8px;">
+                </a>
+            </details>
+        </div>
+
+        <div class="mod-section">
+            <div class="mod-title">
+                QFSK
+                <span class="doppler-badge">Doppler: 38.9 kHz</span>
+            </div>
+            
+            <div class="clickable-grid">
+                <div>
+                    <a href="individual_plots/QFSK/01_clean_magnitude_spectrogram.png" target="_blank">
+                        <img src="individual_plots/QFSK/01_clean_magnitude_spectrogram.png" alt="Clean Mag Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Magnitude Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/QFSK/02_clean_phase_spectrogram.png" target="_blank">
+                        <img src="individual_plots/QFSK/02_clean_phase_spectrogram.png" alt="Clean Phase Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Phase Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/QFSK/07_leo_magnitude_spectrogram.png" target="_blank">
+                        <img src="individual_plots/QFSK/07_leo_magnitude_spectrogram.png" alt="LEO Mag Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Magnitude Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/QFSK/08_leo_phase_spectrogram.png" target="_blank">
+                        <img src="individual_plots/QFSK/08_leo_phase_spectrogram.png" alt="LEO Phase Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Phase Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/QFSK/03_clean_instantaneous_frequency.png" target="_blank">
+                        <img src="individual_plots/QFSK/03_clean_instantaneous_frequency.png" alt="Clean IF" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Instantaneous Frequency</div>
+                </div>
+                <div>
+                    <a href="individual_plots/QFSK/04_clean_time_domain.png" target="_blank">
+                        <img src="individual_plots/QFSK/04_clean_time_domain.png" alt="Clean Time" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Time Domain</div>
+                </div>
+                <div>
+                    <a href="individual_plots/QFSK/09_leo_instantaneous_frequency.png" target="_blank">
+                        <img src="individual_plots/QFSK/09_leo_instantaneous_frequency.png" alt="LEO IF" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Instantaneous Frequency</div>
+                </div>
+                <div>
+                    <a href="individual_plots/QFSK/10_leo_time_domain.png" target="_blank">
+                        <img src="individual_plots/QFSK/10_leo_time_domain.png" alt="LEO Time" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Time Domain</div>
+                </div>
+                <div>
+                    <a href="individual_plots/QFSK/05_clean_frequency_spectrum.png" target="_blank">
+                        <img src="individual_plots/QFSK/05_clean_frequency_spectrum.png" alt="Clean Freq" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Frequency Spectrum</div>
+                </div>
+                <div>
+                    <a href="individual_plots/QFSK/06_clean_iq_constellation.png" target="_blank">
+                        <img src="individual_plots/QFSK/06_clean_iq_constellation.png" alt="Clean IQ" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean IQ Constellation</div>
+                </div>
+                <div>
+                    <a href="individual_plots/QFSK/11_leo_frequency_spectrum.png" target="_blank">
+                        <img src="individual_plots/QFSK/11_leo_frequency_spectrum.png" alt="LEO Freq" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Frequency Spectrum</div>
+                </div>
+                <div>
+                    <a href="individual_plots/QFSK/12_leo_iq_constellation.png" target="_blank">
+                        <img src="individual_plots/QFSK/12_leo_iq_constellation.png" alt="LEO IQ" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO IQ Constellation</div>
+                </div>
+            </div>
+            
+            <details>
+                <summary style="cursor: pointer; color: #58a6ff; margin-top: 10px;">
+                    View combined 3x4 overview
+                </summary>
+                <a href="QFSK_before_after.png" target="_blank">
+                    <img src="QFSK_before_after.png" alt="QFSK combined" style="width: 100%; margin-top: 10px; border-radius: 8px;">
+                </a>
+            </details>
+        </div>
+
+        <div class="mod-section">
+            <div class="mod-title">
+                BPSK
+                <span class="doppler-badge">Doppler: 38.9 kHz</span>
+            </div>
+            
+            <div class="clickable-grid">
+                <div>
+                    <a href="individual_plots/BPSK/01_clean_magnitude_spectrogram.png" target="_blank">
+                        <img src="individual_plots/BPSK/01_clean_magnitude_spectrogram.png" alt="Clean Mag Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Magnitude Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/BPSK/02_clean_phase_spectrogram.png" target="_blank">
+                        <img src="individual_plots/BPSK/02_clean_phase_spectrogram.png" alt="Clean Phase Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Phase Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/BPSK/07_leo_magnitude_spectrogram.png" target="_blank">
+                        <img src="individual_plots/BPSK/07_leo_magnitude_spectrogram.png" alt="LEO Mag Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Magnitude Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/BPSK/08_leo_phase_spectrogram.png" target="_blank">
+                        <img src="individual_plots/BPSK/08_leo_phase_spectrogram.png" alt="LEO Phase Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Phase Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/BPSK/03_clean_instantaneous_frequency.png" target="_blank">
+                        <img src="individual_plots/BPSK/03_clean_instantaneous_frequency.png" alt="Clean IF" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Instantaneous Frequency</div>
+                </div>
+                <div>
+                    <a href="individual_plots/BPSK/04_clean_time_domain.png" target="_blank">
+                        <img src="individual_plots/BPSK/04_clean_time_domain.png" alt="Clean Time" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Time Domain</div>
+                </div>
+                <div>
+                    <a href="individual_plots/BPSK/09_leo_instantaneous_frequency.png" target="_blank">
+                        <img src="individual_plots/BPSK/09_leo_instantaneous_frequency.png" alt="LEO IF" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Instantaneous Frequency</div>
+                </div>
+                <div>
+                    <a href="individual_plots/BPSK/10_leo_time_domain.png" target="_blank">
+                        <img src="individual_plots/BPSK/10_leo_time_domain.png" alt="LEO Time" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Time Domain</div>
+                </div>
+                <div>
+                    <a href="individual_plots/BPSK/05_clean_frequency_spectrum.png" target="_blank">
+                        <img src="individual_plots/BPSK/05_clean_frequency_spectrum.png" alt="Clean Freq" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Frequency Spectrum</div>
+                </div>
+                <div>
+                    <a href="individual_plots/BPSK/06_clean_iq_constellation.png" target="_blank">
+                        <img src="individual_plots/BPSK/06_clean_iq_constellation.png" alt="Clean IQ" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean IQ Constellation</div>
+                </div>
+                <div>
+                    <a href="individual_plots/BPSK/11_leo_frequency_spectrum.png" target="_blank">
+                        <img src="individual_plots/BPSK/11_leo_frequency_spectrum.png" alt="LEO Freq" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Frequency Spectrum</div>
+                </div>
+                <div>
+                    <a href="individual_plots/BPSK/12_leo_iq_constellation.png" target="_blank">
+                        <img src="individual_plots/BPSK/12_leo_iq_constellation.png" alt="LEO IQ" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO IQ Constellation</div>
+                </div>
+            </div>
+            
+            <details>
+                <summary style="cursor: pointer; color: #58a6ff; margin-top: 10px;">
+                    View combined 3x4 overview
+                </summary>
+                <a href="BPSK_before_after.png" target="_blank">
+                    <img src="BPSK_before_after.png" alt="BPSK combined" style="width: 100%; margin-top: 10px; border-radius: 8px;">
+                </a>
+            </details>
+        </div>
+
+        <div class="mod-section">
+            <div class="mod-title">
+                Frank
+                <span class="doppler-badge">Doppler: 38.9 kHz</span>
+            </div>
+            
+            <div class="clickable-grid">
+                <div>
+                    <a href="individual_plots/Frank/01_clean_magnitude_spectrogram.png" target="_blank">
+                        <img src="individual_plots/Frank/01_clean_magnitude_spectrogram.png" alt="Clean Mag Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Magnitude Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/Frank/02_clean_phase_spectrogram.png" target="_blank">
+                        <img src="individual_plots/Frank/02_clean_phase_spectrogram.png" alt="Clean Phase Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Phase Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/Frank/07_leo_magnitude_spectrogram.png" target="_blank">
+                        <img src="individual_plots/Frank/07_leo_magnitude_spectrogram.png" alt="LEO Mag Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Magnitude Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/Frank/08_leo_phase_spectrogram.png" target="_blank">
+                        <img src="individual_plots/Frank/08_leo_phase_spectrogram.png" alt="LEO Phase Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Phase Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/Frank/03_clean_instantaneous_frequency.png" target="_blank">
+                        <img src="individual_plots/Frank/03_clean_instantaneous_frequency.png" alt="Clean IF" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Instantaneous Frequency</div>
+                </div>
+                <div>
+                    <a href="individual_plots/Frank/04_clean_time_domain.png" target="_blank">
+                        <img src="individual_plots/Frank/04_clean_time_domain.png" alt="Clean Time" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Time Domain</div>
+                </div>
+                <div>
+                    <a href="individual_plots/Frank/09_leo_instantaneous_frequency.png" target="_blank">
+                        <img src="individual_plots/Frank/09_leo_instantaneous_frequency.png" alt="LEO IF" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Instantaneous Frequency</div>
+                </div>
+                <div>
+                    <a href="individual_plots/Frank/10_leo_time_domain.png" target="_blank">
+                        <img src="individual_plots/Frank/10_leo_time_domain.png" alt="LEO Time" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Time Domain</div>
+                </div>
+                <div>
+                    <a href="individual_plots/Frank/05_clean_frequency_spectrum.png" target="_blank">
+                        <img src="individual_plots/Frank/05_clean_frequency_spectrum.png" alt="Clean Freq" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Frequency Spectrum</div>
+                </div>
+                <div>
+                    <a href="individual_plots/Frank/06_clean_iq_constellation.png" target="_blank">
+                        <img src="individual_plots/Frank/06_clean_iq_constellation.png" alt="Clean IQ" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean IQ Constellation</div>
+                </div>
+                <div>
+                    <a href="individual_plots/Frank/11_leo_frequency_spectrum.png" target="_blank">
+                        <img src="individual_plots/Frank/11_leo_frequency_spectrum.png" alt="LEO Freq" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Frequency Spectrum</div>
+                </div>
+                <div>
+                    <a href="individual_plots/Frank/12_leo_iq_constellation.png" target="_blank">
+                        <img src="individual_plots/Frank/12_leo_iq_constellation.png" alt="LEO IQ" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO IQ Constellation</div>
+                </div>
+            </div>
+            
+            <details>
+                <summary style="cursor: pointer; color: #58a6ff; margin-top: 10px;">
+                    View combined 3x4 overview
+                </summary>
+                <a href="Frank_before_after.png" target="_blank">
+                    <img src="Frank_before_after.png" alt="Frank combined" style="width: 100%; margin-top: 10px; border-radius: 8px;">
+                </a>
+            </details>
+        </div>
+
+        <div class="mod-section">
+            <div class="mod-title">
+                P1
+                <span class="doppler-badge">Doppler: 38.9 kHz</span>
+            </div>
+            
+            <div class="clickable-grid">
+                <div>
+                    <a href="individual_plots/P1/01_clean_magnitude_spectrogram.png" target="_blank">
+                        <img src="individual_plots/P1/01_clean_magnitude_spectrogram.png" alt="Clean Mag Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Magnitude Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/P1/02_clean_phase_spectrogram.png" target="_blank">
+                        <img src="individual_plots/P1/02_clean_phase_spectrogram.png" alt="Clean Phase Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Phase Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/P1/07_leo_magnitude_spectrogram.png" target="_blank">
+                        <img src="individual_plots/P1/07_leo_magnitude_spectrogram.png" alt="LEO Mag Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Magnitude Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/P1/08_leo_phase_spectrogram.png" target="_blank">
+                        <img src="individual_plots/P1/08_leo_phase_spectrogram.png" alt="LEO Phase Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Phase Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/P1/03_clean_instantaneous_frequency.png" target="_blank">
+                        <img src="individual_plots/P1/03_clean_instantaneous_frequency.png" alt="Clean IF" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Instantaneous Frequency</div>
+                </div>
+                <div>
+                    <a href="individual_plots/P1/04_clean_time_domain.png" target="_blank">
+                        <img src="individual_plots/P1/04_clean_time_domain.png" alt="Clean Time" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Time Domain</div>
+                </div>
+                <div>
+                    <a href="individual_plots/P1/09_leo_instantaneous_frequency.png" target="_blank">
+                        <img src="individual_plots/P1/09_leo_instantaneous_frequency.png" alt="LEO IF" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Instantaneous Frequency</div>
+                </div>
+                <div>
+                    <a href="individual_plots/P1/10_leo_time_domain.png" target="_blank">
+                        <img src="individual_plots/P1/10_leo_time_domain.png" alt="LEO Time" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Time Domain</div>
+                </div>
+                <div>
+                    <a href="individual_plots/P1/05_clean_frequency_spectrum.png" target="_blank">
+                        <img src="individual_plots/P1/05_clean_frequency_spectrum.png" alt="Clean Freq" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Frequency Spectrum</div>
+                </div>
+                <div>
+                    <a href="individual_plots/P1/06_clean_iq_constellation.png" target="_blank">
+                        <img src="individual_plots/P1/06_clean_iq_constellation.png" alt="Clean IQ" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean IQ Constellation</div>
+                </div>
+                <div>
+                    <a href="individual_plots/P1/11_leo_frequency_spectrum.png" target="_blank">
+                        <img src="individual_plots/P1/11_leo_frequency_spectrum.png" alt="LEO Freq" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Frequency Spectrum</div>
+                </div>
+                <div>
+                    <a href="individual_plots/P1/12_leo_iq_constellation.png" target="_blank">
+                        <img src="individual_plots/P1/12_leo_iq_constellation.png" alt="LEO IQ" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO IQ Constellation</div>
+                </div>
+            </div>
+            
+            <details>
+                <summary style="cursor: pointer; color: #58a6ff; margin-top: 10px;">
+                    View combined 3x4 overview
+                </summary>
+                <a href="P1_before_after.png" target="_blank">
+                    <img src="P1_before_after.png" alt="P1 combined" style="width: 100%; margin-top: 10px; border-radius: 8px;">
+                </a>
+            </details>
+        </div>
+
+        <div class="mod-section">
+            <div class="mod-title">
+                P2
+                <span class="doppler-badge">Doppler: 38.9 kHz</span>
+            </div>
+            
+            <div class="clickable-grid">
+                <div>
+                    <a href="individual_plots/P2/01_clean_magnitude_spectrogram.png" target="_blank">
+                        <img src="individual_plots/P2/01_clean_magnitude_spectrogram.png" alt="Clean Mag Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Magnitude Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/P2/02_clean_phase_spectrogram.png" target="_blank">
+                        <img src="individual_plots/P2/02_clean_phase_spectrogram.png" alt="Clean Phase Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Phase Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/P2/07_leo_magnitude_spectrogram.png" target="_blank">
+                        <img src="individual_plots/P2/07_leo_magnitude_spectrogram.png" alt="LEO Mag Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Magnitude Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/P2/08_leo_phase_spectrogram.png" target="_blank">
+                        <img src="individual_plots/P2/08_leo_phase_spectrogram.png" alt="LEO Phase Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Phase Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/P2/03_clean_instantaneous_frequency.png" target="_blank">
+                        <img src="individual_plots/P2/03_clean_instantaneous_frequency.png" alt="Clean IF" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Instantaneous Frequency</div>
+                </div>
+                <div>
+                    <a href="individual_plots/P2/04_clean_time_domain.png" target="_blank">
+                        <img src="individual_plots/P2/04_clean_time_domain.png" alt="Clean Time" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Time Domain</div>
+                </div>
+                <div>
+                    <a href="individual_plots/P2/09_leo_instantaneous_frequency.png" target="_blank">
+                        <img src="individual_plots/P2/09_leo_instantaneous_frequency.png" alt="LEO IF" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Instantaneous Frequency</div>
+                </div>
+                <div>
+                    <a href="individual_plots/P2/10_leo_time_domain.png" target="_blank">
+                        <img src="individual_plots/P2/10_leo_time_domain.png" alt="LEO Time" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Time Domain</div>
+                </div>
+                <div>
+                    <a href="individual_plots/P2/05_clean_frequency_spectrum.png" target="_blank">
+                        <img src="individual_plots/P2/05_clean_frequency_spectrum.png" alt="Clean Freq" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Frequency Spectrum</div>
+                </div>
+                <div>
+                    <a href="individual_plots/P2/06_clean_iq_constellation.png" target="_blank">
+                        <img src="individual_plots/P2/06_clean_iq_constellation.png" alt="Clean IQ" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean IQ Constellation</div>
+                </div>
+                <div>
+                    <a href="individual_plots/P2/11_leo_frequency_spectrum.png" target="_blank">
+                        <img src="individual_plots/P2/11_leo_frequency_spectrum.png" alt="LEO Freq" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Frequency Spectrum</div>
+                </div>
+                <div>
+                    <a href="individual_plots/P2/12_leo_iq_constellation.png" target="_blank">
+                        <img src="individual_plots/P2/12_leo_iq_constellation.png" alt="LEO IQ" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO IQ Constellation</div>
+                </div>
+            </div>
+            
+            <details>
+                <summary style="cursor: pointer; color: #58a6ff; margin-top: 10px;">
+                    View combined 3x4 overview
+                </summary>
+                <a href="P2_before_after.png" target="_blank">
+                    <img src="P2_before_after.png" alt="P2 combined" style="width: 100%; margin-top: 10px; border-radius: 8px;">
+                </a>
+            </details>
+        </div>
+
+        <div class="mod-section">
+            <div class="mod-title">
+                P3
+                <span class="doppler-badge">Doppler: 38.9 kHz</span>
+            </div>
+            
+            <div class="clickable-grid">
+                <div>
+                    <a href="individual_plots/P3/01_clean_magnitude_spectrogram.png" target="_blank">
+                        <img src="individual_plots/P3/01_clean_magnitude_spectrogram.png" alt="Clean Mag Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Magnitude Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/P3/02_clean_phase_spectrogram.png" target="_blank">
+                        <img src="individual_plots/P3/02_clean_phase_spectrogram.png" alt="Clean Phase Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Phase Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/P3/07_leo_magnitude_spectrogram.png" target="_blank">
+                        <img src="individual_plots/P3/07_leo_magnitude_spectrogram.png" alt="LEO Mag Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Magnitude Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/P3/08_leo_phase_spectrogram.png" target="_blank">
+                        <img src="individual_plots/P3/08_leo_phase_spectrogram.png" alt="LEO Phase Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Phase Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/P3/03_clean_instantaneous_frequency.png" target="_blank">
+                        <img src="individual_plots/P3/03_clean_instantaneous_frequency.png" alt="Clean IF" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Instantaneous Frequency</div>
+                </div>
+                <div>
+                    <a href="individual_plots/P3/04_clean_time_domain.png" target="_blank">
+                        <img src="individual_plots/P3/04_clean_time_domain.png" alt="Clean Time" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Time Domain</div>
+                </div>
+                <div>
+                    <a href="individual_plots/P3/09_leo_instantaneous_frequency.png" target="_blank">
+                        <img src="individual_plots/P3/09_leo_instantaneous_frequency.png" alt="LEO IF" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Instantaneous Frequency</div>
+                </div>
+                <div>
+                    <a href="individual_plots/P3/10_leo_time_domain.png" target="_blank">
+                        <img src="individual_plots/P3/10_leo_time_domain.png" alt="LEO Time" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Time Domain</div>
+                </div>
+                <div>
+                    <a href="individual_plots/P3/05_clean_frequency_spectrum.png" target="_blank">
+                        <img src="individual_plots/P3/05_clean_frequency_spectrum.png" alt="Clean Freq" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Frequency Spectrum</div>
+                </div>
+                <div>
+                    <a href="individual_plots/P3/06_clean_iq_constellation.png" target="_blank">
+                        <img src="individual_plots/P3/06_clean_iq_constellation.png" alt="Clean IQ" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean IQ Constellation</div>
+                </div>
+                <div>
+                    <a href="individual_plots/P3/11_leo_frequency_spectrum.png" target="_blank">
+                        <img src="individual_plots/P3/11_leo_frequency_spectrum.png" alt="LEO Freq" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Frequency Spectrum</div>
+                </div>
+                <div>
+                    <a href="individual_plots/P3/12_leo_iq_constellation.png" target="_blank">
+                        <img src="individual_plots/P3/12_leo_iq_constellation.png" alt="LEO IQ" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO IQ Constellation</div>
+                </div>
+            </div>
+            
+            <details>
+                <summary style="cursor: pointer; color: #58a6ff; margin-top: 10px;">
+                    View combined 3x4 overview
+                </summary>
+                <a href="P3_before_after.png" target="_blank">
+                    <img src="P3_before_after.png" alt="P3 combined" style="width: 100%; margin-top: 10px; border-radius: 8px;">
+                </a>
+            </details>
+        </div>
+
+        <div class="mod-section">
+            <div class="mod-title">
+                P4
+                <span class="doppler-badge">Doppler: 38.9 kHz</span>
+            </div>
+            
+            <div class="clickable-grid">
+                <div>
+                    <a href="individual_plots/P4/01_clean_magnitude_spectrogram.png" target="_blank">
+                        <img src="individual_plots/P4/01_clean_magnitude_spectrogram.png" alt="Clean Mag Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Magnitude Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/P4/02_clean_phase_spectrogram.png" target="_blank">
+                        <img src="individual_plots/P4/02_clean_phase_spectrogram.png" alt="Clean Phase Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Phase Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/P4/07_leo_magnitude_spectrogram.png" target="_blank">
+                        <img src="individual_plots/P4/07_leo_magnitude_spectrogram.png" alt="LEO Mag Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Magnitude Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/P4/08_leo_phase_spectrogram.png" target="_blank">
+                        <img src="individual_plots/P4/08_leo_phase_spectrogram.png" alt="LEO Phase Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Phase Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/P4/03_clean_instantaneous_frequency.png" target="_blank">
+                        <img src="individual_plots/P4/03_clean_instantaneous_frequency.png" alt="Clean IF" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Instantaneous Frequency</div>
+                </div>
+                <div>
+                    <a href="individual_plots/P4/04_clean_time_domain.png" target="_blank">
+                        <img src="individual_plots/P4/04_clean_time_domain.png" alt="Clean Time" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Time Domain</div>
+                </div>
+                <div>
+                    <a href="individual_plots/P4/09_leo_instantaneous_frequency.png" target="_blank">
+                        <img src="individual_plots/P4/09_leo_instantaneous_frequency.png" alt="LEO IF" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Instantaneous Frequency</div>
+                </div>
+                <div>
+                    <a href="individual_plots/P4/10_leo_time_domain.png" target="_blank">
+                        <img src="individual_plots/P4/10_leo_time_domain.png" alt="LEO Time" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Time Domain</div>
+                </div>
+                <div>
+                    <a href="individual_plots/P4/05_clean_frequency_spectrum.png" target="_blank">
+                        <img src="individual_plots/P4/05_clean_frequency_spectrum.png" alt="Clean Freq" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Frequency Spectrum</div>
+                </div>
+                <div>
+                    <a href="individual_plots/P4/06_clean_iq_constellation.png" target="_blank">
+                        <img src="individual_plots/P4/06_clean_iq_constellation.png" alt="Clean IQ" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean IQ Constellation</div>
+                </div>
+                <div>
+                    <a href="individual_plots/P4/11_leo_frequency_spectrum.png" target="_blank">
+                        <img src="individual_plots/P4/11_leo_frequency_spectrum.png" alt="LEO Freq" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Frequency Spectrum</div>
+                </div>
+                <div>
+                    <a href="individual_plots/P4/12_leo_iq_constellation.png" target="_blank">
+                        <img src="individual_plots/P4/12_leo_iq_constellation.png" alt="LEO IQ" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO IQ Constellation</div>
+                </div>
+            </div>
+            
+            <details>
+                <summary style="cursor: pointer; color: #58a6ff; margin-top: 10px;">
+                    View combined 3x4 overview
+                </summary>
+                <a href="P4_before_after.png" target="_blank">
+                    <img src="P4_before_after.png" alt="P4 combined" style="width: 100%; margin-top: 10px; border-radius: 8px;">
+                </a>
+            </details>
+        </div>
+
+        <div class="mod-section">
+            <div class="mod-title">
+                LFM-BPSK
+                <span class="doppler-badge">Doppler: 38.9 kHz</span>
+            </div>
+            
+            <div class="clickable-grid">
+                <div>
+                    <a href="individual_plots/LFM-BPSK/01_clean_magnitude_spectrogram.png" target="_blank">
+                        <img src="individual_plots/LFM-BPSK/01_clean_magnitude_spectrogram.png" alt="Clean Mag Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Magnitude Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/LFM-BPSK/02_clean_phase_spectrogram.png" target="_blank">
+                        <img src="individual_plots/LFM-BPSK/02_clean_phase_spectrogram.png" alt="Clean Phase Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Phase Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/LFM-BPSK/07_leo_magnitude_spectrogram.png" target="_blank">
+                        <img src="individual_plots/LFM-BPSK/07_leo_magnitude_spectrogram.png" alt="LEO Mag Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Magnitude Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/LFM-BPSK/08_leo_phase_spectrogram.png" target="_blank">
+                        <img src="individual_plots/LFM-BPSK/08_leo_phase_spectrogram.png" alt="LEO Phase Spec" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Phase Spectrogram</div>
+                </div>
+                <div>
+                    <a href="individual_plots/LFM-BPSK/03_clean_instantaneous_frequency.png" target="_blank">
+                        <img src="individual_plots/LFM-BPSK/03_clean_instantaneous_frequency.png" alt="Clean IF" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Instantaneous Frequency</div>
+                </div>
+                <div>
+                    <a href="individual_plots/LFM-BPSK/04_clean_time_domain.png" target="_blank">
+                        <img src="individual_plots/LFM-BPSK/04_clean_time_domain.png" alt="Clean Time" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Time Domain</div>
+                </div>
+                <div>
+                    <a href="individual_plots/LFM-BPSK/09_leo_instantaneous_frequency.png" target="_blank">
+                        <img src="individual_plots/LFM-BPSK/09_leo_instantaneous_frequency.png" alt="LEO IF" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Instantaneous Frequency</div>
+                </div>
+                <div>
+                    <a href="individual_plots/LFM-BPSK/10_leo_time_domain.png" target="_blank">
+                        <img src="individual_plots/LFM-BPSK/10_leo_time_domain.png" alt="LEO Time" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Time Domain</div>
+                </div>
+                <div>
+                    <a href="individual_plots/LFM-BPSK/05_clean_frequency_spectrum.png" target="_blank">
+                        <img src="individual_plots/LFM-BPSK/05_clean_frequency_spectrum.png" alt="Clean Freq" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean Frequency Spectrum</div>
+                </div>
+                <div>
+                    <a href="individual_plots/LFM-BPSK/06_clean_iq_constellation.png" target="_blank">
+                        <img src="individual_plots/LFM-BPSK/06_clean_iq_constellation.png" alt="Clean IQ" loading="lazy">
+                    </a>
+                    <div class="grid-label">Clean IQ Constellation</div>
+                </div>
+                <div>
+                    <a href="individual_plots/LFM-BPSK/11_leo_frequency_spectrum.png" target="_blank">
+                        <img src="individual_plots/LFM-BPSK/11_leo_frequency_spectrum.png" alt="LEO Freq" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO Frequency Spectrum</div>
+                </div>
+                <div>
+                    <a href="individual_plots/LFM-BPSK/12_leo_iq_constellation.png" target="_blank">
+                        <img src="individual_plots/LFM-BPSK/12_leo_iq_constellation.png" alt="LEO IQ" loading="lazy">
+                    </a>
+                    <div class="grid-label">LEO IQ Constellation</div>
+                </div>
+            </div>
+            
+            <details>
+                <summary style="cursor: pointer; color: #58a6ff; margin-top: 10px;">
+                    View combined 3x4 overview
+                </summary>
+                <a href="LFM-BPSK_before_after.png" target="_blank">
+                    <img src="LFM-BPSK_before_after.png" alt="LFM-BPSK combined" style="width: 100%; margin-top: 10px; border-radius: 8px;">
+                </a>
+            </details>
+        </div>
+
+        <h2>Classification Difficulty Summary</h2>
+        
+        <div class="insight-box">
+            <h3 style="color: #3fb950;">EASY - Frequency-Modulated (7 types)</h3>
+            <p>NM, LFM, DLFM, MLFM, EQFM, SFM, LFM-BPSK</p>
+            <p>Unique frequency-vs-time patterns survive the channel intact. Doppler just shifts the whole pattern up/down -- shape unchanged.</p>
+        </div>
+        
+        <div class="insight-box">
+            <h3 style="color: #d2991d;">MEDIUM - Frequency-Shift Keyed (2 types)</h3>
+            <p>BFSK, QFSK</p>
+            <p>Discrete frequency hops are clear but fewer distinct features. QFSK (4 frequencies) is denser than BFSK (2 frequencies).</p>
+        </div>
+        
+        <div class="insight-box">
+            <h3 style="color: #da3633;">HARD - Phase-Modulated (6 types)</h3>
+            <p>BPSK, Frank, P1, P2, P3, P4</p>
+            <p>Magnitude spectrograms look nearly IDENTICAL (all horizontal lines!). 
+            Complex STFT phase channel REVEALS the phase jumps - this is the key novelty.</p>
+        </div>
+        
+        <h2>Next Steps</h2>
+        <ol>
+            <li>Train baseline CNN with magnitude-only spectrograms (will fail on phase mods)</li>
+            <li>Train proposed CNN with complex STFT (2-channel: magnitude + phase)</li>
+            <li>Implement multi-branch architecture (raw I/Q + complex STFT)</li>
+            <li>Ablation study: magnitude-only vs complex STFT vs multi-branch</li>
+            <li>Show phase branch enables P1/P2 discrimination (key result for WiSEE 2026)</li>
+        </ol>
+        
+        <div class="footer">
+            <p>WiSEE 2026 Research | LEO NTN Channel Effects on Automatic Modulation Classification</p>
+            <p>Single-Component Signals | 15 Modulation Types | Complex STFT + Raw I/Q Multi-Branch Architecture</p>
+        </div>
+    </div>
+</body>
+</html>
